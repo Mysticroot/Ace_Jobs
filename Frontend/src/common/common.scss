@@ -1,0 +1,217 @@
+/* common.scss — shared navbar & footer styles matching project theme */
+
+.aj-navbar {
+  background: linear-gradient(90deg, #bf2759 0%, #d20d3b 100%);
+  border-bottom: 2px solid #a80627;
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+
+  .aj-nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .aj-brand {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .aj-nav-logo {
+    gap: 0.6rem;
+    align-items: center;
+    display: flex;
+    cursor: pointer;
+  }
+
+  .aj-logo-image {
+    height: 36px;
+    width: auto;
+    display: block;
+    margin-right: 0.6rem;
+    object-fit: contain;
+  }
+
+  .aj-logo {
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: whitesmoke;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  .aj-nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    margin-left: auto;
+  }
+
+  .aj-nav-link {
+    color: whitesmoke;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.20rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    opacity: 0.95;
+  }
+
+  .aj-nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    opacity: 1;
+  }
+}
+
+.aj-footer {
+  background: linear-gradient(90deg, #0f0f0f 0%, #1a1a1a 100%);
+  border-top: 2px solid #e1034d;
+  color: whitesmoke;
+  padding: 1.5rem 2rem 1.5rem;
+  margin-top: auto;
+
+  .aj-footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .footer-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .footer-title {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #e1034d;
+    margin: 0;
+  }
+
+  .footer-subtitle {
+    font-weight: 600;
+    font-size: 1rem;
+    color: whitesmoke;
+    margin: 0;
+  }
+
+  .footer-desc {
+    font-size: 0.9rem;
+    color: #bbb;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .footer-social {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .social-link {
+    color: #bbb;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+
+    &:hover {
+      color: #e1034d;
+      text-decoration: underline;
+    }
+  }
+
+  .footer-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+
+    li a {
+      color: #bbb;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+
+      &:hover {
+        color: #e1034d;
+        padding-left: 0.4rem;
+      }
+    }
+  }
+
+  .footer-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    color: #999;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-copyright {
+    margin: 0;
+  }
+
+  .footer-credit {
+    margin: 0;
+  }
+}
+
+/* Responsive tweaks */
+@media (max-width: 640px) {
+  .aj-navbar {
+    padding: 0.75rem 1rem;
+  }
+
+  .aj-nav-links {
+    gap: 1rem;
+  }
+
+  .aj-nav-link {
+    font-size: 0.85rem;
+    padding: 0.3rem 0.6rem;
+  }
+
+  .aj-footer {
+    padding: 2rem 1rem 1rem;
+
+    .aj-footer-content {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .footer-bottom {
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+    }
+  }
+
+  /* smaller logo on mobile */
+  .aj-logo-image {
+    height: 28px;
+  }
+}
