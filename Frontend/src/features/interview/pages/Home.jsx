@@ -9,17 +9,35 @@ const Home = () => {
   const [selfDescription, setSelfDescription] = useState("");
   const resumeInputRef = useRef();
   const [resumeName, setResumeName] = useState("");
+  const [resumeFile, setResumeFile] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
 
   const handleGenerateReport = async () => {
-    const resumeFile = resumeInputRef.current.files[0];
-    const data = await generateReport({
-      jobDescription,
-      selfDescription,
-      resumeFile,
-    });
-    navigate(`/interview/${data._id}`);
+    const selectedResumeFile =
+      resumeFile || resumeInputRef.current?.files?.[0] || null;
+
+    if (!selectedResumeFile && !selfDescription.trim()) {
+      setErrorMessage("Please upload a resume or add a self-description.");
+      return;
+    }
+
+    setErrorMessage("");
+
+    try {
+      const data = await generateReport({
+        jobDescription,
+        selfDescription,
+        resumeFile: selectedResumeFile,
+      });
+      navigate(`/interview/${data._id}`);
+    } catch (error) {
+      setErrorMessage(
+        error?.message ||
+          "Failed to generate interview strategy. Please ensure the backend is running and try again.",
+      );
+    }
   };
 
   if (loading) {
@@ -45,6 +63,7 @@ const Home = () => {
 
       {/* Main Card */}
       <div className="interview-card">
+        {errorMessage && <p className="form-error">{errorMessage}</p>}
         <div className="interview-card__body">
           {/* Left Panel - Job Description */}
           <div className="panel panel--left">
@@ -142,7 +161,10 @@ const Home = () => {
                     accept=".pdf,.docx"
                     onChange={(e) => {
                       const f = e.target.files && e.target.files[0];
-                      if (f) setResumeName(f.name);
+                      setResumeFile(f || null);
+                      if (f) {
+                        setResumeName(f.name);
+                      }
                     }}
                   />
                 </label>
@@ -170,6 +192,7 @@ const Home = () => {
                     className="dropzone-file__remove"
                     onClick={() => {
                       setResumeName("");
+                      setResumeFile(null);
                       if (resumeInputRef.current)
                         resumeInputRef.current.value = "";
                     }}
